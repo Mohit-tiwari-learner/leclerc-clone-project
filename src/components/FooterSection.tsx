@@ -1,4 +1,6 @@
-import { Instagram } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { MagneticWrap, StaggerContainer, StaggerItem, SplitText } from "./ScrollAnimations";
 
 const socials = [
   { label: "Instagram", href: "https://www.instagram.com/charles_leclerc/" },
@@ -9,61 +11,83 @@ const socials = [
 ];
 
 const FooterSection = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
   return (
-    <footer className="bg-foreground section-padding">
+    <footer className="bg-foreground section-padding" ref={ref}>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-start justify-between gap-12">
           <div>
-            <p className="font-display font-black text-5xl text-primary-foreground tracking-tighter">
-              CL<span className="text-primary">16</span>
-            </p>
-            <p className="font-body text-primary-foreground/50 text-sm mt-4 max-w-sm">
-              Fan tribute site celebrating the career and journey of one of 
+            <MagneticWrap strength={0.2}>
+              <p className="font-display font-black text-5xl text-primary-foreground tracking-tighter">
+                <SplitText text="CL" charClassName="text-primary-foreground" delay={0} />
+                <SplitText text="16" charClassName="text-primary" delay={0.1} />
+              </p>
+            </MagneticWrap>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="font-body text-primary-foreground/50 text-sm mt-4 max-w-sm"
+            >
+              Fan tribute site celebrating the career and journey of one of
               Formula 1's most talented drivers.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <StaggerContainer className="flex flex-col gap-3" staggerDelay={0.06}>
             <p className="text-display text-xs text-primary tracking-[0.3em] mb-2">
               Follow
             </p>
             {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-body text-primary-foreground/60 text-sm hover:text-primary transition-colors"
-              >
-                {s.label}
-              </a>
+              <StaggerItem key={s.label}>
+                <MagneticWrap strength={0.4}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-primary-foreground/60 text-sm hover:text-primary transition-colors inline-block"
+                  >
+                    {s.label}
+                  </a>
+                </MagneticWrap>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
-          <div className="flex flex-col gap-3">
+          <StaggerContainer className="flex flex-col gap-3" staggerDelay={0.06}>
             <p className="text-display text-xs text-primary tracking-[0.3em] mb-2">
               Navigate
             </p>
             {["The Driver", "Career", "Gallery", "Life"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(/\s/g, "")}`}
-                className="font-body text-primary-foreground/60 text-sm hover:text-primary transition-colors"
-              >
-                {item}
-              </a>
+              <StaggerItem key={item}>
+                <MagneticWrap strength={0.4}>
+                  <a
+                    href={`#${item.toLowerCase().replace(/\s/g, "")}`}
+                    className="font-body text-primary-foreground/60 text-sm hover:text-primary transition-colors inline-block"
+                  >
+                    {item}
+                  </a>
+                </MagneticWrap>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="border-t border-primary-foreground/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
           <p className="font-body text-primary-foreground/30 text-xs">
             © 2025 Fan Tribute. Not affiliated with Charles Leclerc or Ferrari.
           </p>
           <p className="font-body text-primary-foreground/30 text-xs">
             Built with passion for motorsport
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
