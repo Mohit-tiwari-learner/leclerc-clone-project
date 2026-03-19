@@ -12,11 +12,11 @@ const QuoteSection2 = () => {
   const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 1.05]);
 
   return (
-    <motion.section
-      ref={ref}
-      style={{ scale: bgScale }}
-      className="section-padding bg-primary overflow-hidden"
-    >
+    <section ref={ref} className="overflow-hidden">
+      <motion.div
+        style={{ scale: bgScale }}
+        className="section-padding bg-primary"
+      >
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ width: "0%" }}
