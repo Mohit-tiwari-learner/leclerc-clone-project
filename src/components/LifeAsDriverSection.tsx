@@ -1,9 +1,10 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import trainingImg from "@/assets/training.jpg";
 import preparationImg from "@/assets/preparation.jpg";
 import racingImg from "@/assets/racing.jpg";
 import offseasonImg from "@/assets/offseason.jpg";
+import { SplitText, SplitWords, RevealLine, ClipReveal } from "./ScrollAnimations";
 
 const cards = [
   {
@@ -28,62 +29,91 @@ const cards = [
   },
 ];
 
-const LifeAsDriverSection = () => {
+const LifeCard = ({ card, index }: { card: typeof cards[0]; index: number }) => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const cardRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section id="life" className="section-padding bg-background" ref={ref}>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 80, rotateY: -5 }}
+      animate={inView ? { opacity: 1, y: 0, rotateY: 0 } : {}}
+      transition={{
+        duration: 0.8,
+        delay: index * 0.12,
+        ease: [0.215, 0.61, 0.355, 1],
+      }}
+      className="relative group overflow-hidden cursor-pointer"
+      style={{ perspective: 1000 }}
+    >
+      <div ref={cardRef} className="overflow-hidden h-[400px]">
+        <motion.img
+          src={card.img}
+          alt={card.title}
+          style={{ y: imgY }}
+          className="w-full h-[120%] object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent flex flex-col justify-end p-6">
+        <motion.h3
+          initial={{ y: 10 }}
+          whileHover={{ y: -5 }}
+          className="font-display font-bold text-xl text-primary-foreground uppercase tracking-wider mb-2"
+        >
+          {card.title}
+        </motion.h3>
+        <p className="font-body text-primary-foreground/70 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+          {card.desc}
+        </p>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileHover={{ scaleX: 1 }}
+          className="h-[2px] bg-primary mt-4 origin-left"
+          transition={{ duration: 0.4 }}
+        />
+      </div>
+    </motion.div>
+  );
+};
+
+const LifeAsDriverSection = () => {
+  return (
+    <section id="life" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-display text-xs text-primary mb-4 tracking-[0.3em]"
-        >
-          Driving
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display font-extrabold text-4xl md:text-6xl text-foreground mb-6 uppercase"
-        >
-          Life as a Driver
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <RevealLine className="mb-8 max-w-[100px]" />
+
+        <div className="overflow-hidden mb-2">
+          <motion.p
+            initial={{ y: "100%" }}
+            whileInView={{ y: "0%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
+            className="text-display text-xs text-primary tracking-[0.3em]"
+          >
+            Driving
+          </motion.p>
+        </div>
+
+        <h2 className="font-display font-extrabold text-4xl md:text-6xl text-foreground mb-6 uppercase">
+          <SplitText text="Life as a Driver" delay={0.05} />
+        </h2>
+
+        <SplitWords
+          text="Great talent alone is not enough. It takes years of preparation, both physical and mental, and constant attention to every detail before, during and after every race."
           className="font-body text-muted-foreground text-base md:text-lg max-w-2xl mb-16"
-        >
-          Great talent alone is not enough. It takes years of preparation, both physical 
-          and mental, and constant attention to every detail before, during and after every race.
-        </motion.p>
+          delay={0.2}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
           {cards.map((card, i) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-              className="relative group overflow-hidden cursor-pointer"
-            >
-              <img
-                src={card.img}
-                alt={card.title}
-                className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent flex flex-col justify-end p-6">
-                <h3 className="font-display font-bold text-xl text-primary-foreground uppercase tracking-wider mb-2">
-                  {card.title}
-                </h3>
-                <p className="font-body text-primary-foreground/70 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  {card.desc}
-                </p>
-              </div>
-            </motion.div>
+            <LifeCard key={card.title} card={card} index={i} />
           ))}
         </div>
       </div>

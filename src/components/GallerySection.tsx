@@ -1,61 +1,102 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import heroImg from "@/assets/hero-racing.jpg";
+import { SplitText, RevealLine } from "./ScrollAnimations";
 
 const images = [
-  { src: gallery1, caption: "Podium Celebration" },
-  { src: gallery2, caption: "Monaco Street Circuit" },
-  { src: gallery3, caption: "Crossing the Finish Line" },
-  { src: heroImg, caption: "On Track at Sunset" },
+  { src: gallery1, caption: "Podium Celebration", size: "tall" },
+  { src: gallery2, caption: "Monaco Street Circuit", size: "normal" },
+  { src: gallery3, caption: "Crossing the Finish Line", size: "normal" },
+  { src: heroImg, caption: "On Track at Sunset", size: "tall" },
 ];
 
-const GallerySection = () => {
+const GalleryImage = ({
+  img,
+  index,
+}: {
+  img: { src: string; caption: string; size: string };
+  index: number;
+}) => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
-    <section id="gallery" className="section-padding bg-foreground" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 80, filter: "blur(6px)" }}
+      animate={
+        inView
+          ? { opacity: 1, y: 0, filter: "blur(0px)" }
+          : {}
+      }
+      transition={{
+        duration: 0.9,
+        delay: index * 0.15,
+        ease: [0.215, 0.61, 0.355, 1],
+      }}
+      className={`relative overflow-hidden group cursor-pointer ${
+        img.size === "tall" ? "md:row-span-2" : ""
+      }`}
+    >
+      <div ref={containerRef} className="h-full overflow-hidden">
+        <motion.img
+          src={img.src}
+          alt={img.caption}
+          style={{ y: imgY }}
+          className="w-full h-[300px] md:h-full min-h-[300px] object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        className="absolute inset-0 bg-foreground/50 flex items-end p-6"
+      >
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-display text-xs text-primary mb-4 tracking-[0.3em]"
+          initial={{ y: 20 }}
+          whileHover={{ y: 0 }}
+          className="text-primary-foreground font-display text-xs uppercase tracking-[0.2em]"
         >
-          Gallery
+          {img.caption}
         </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display font-extrabold text-4xl md:text-5xl text-primary-foreground mb-16 uppercase"
-        >
-          Moments
-        </motion.h2>
+      </motion.div>
+    </motion.div>
+  );
+};
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+const GallerySection = () => {
+  return (
+    <section id="gallery" className="section-padding bg-foreground">
+      <div className="max-w-7xl mx-auto">
+        <RevealLine className="mb-8 max-w-[80px]" />
+
+        <div className="overflow-hidden mb-2">
+          <motion.p
+            initial={{ y: "100%" }}
+            whileInView={{ y: "0%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
+            className="text-display text-xs text-primary tracking-[0.3em]"
+          >
+            Gallery
+          </motion.p>
+        </div>
+
+        <h2 className="font-display font-extrabold text-4xl md:text-5xl text-primary-foreground mb-16 uppercase">
+          <SplitText text="Moments" charClassName="text-primary-foreground" delay={0.1} />
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-1 md:h-[800px]">
           {images.map((img, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              className="relative overflow-hidden group cursor-pointer"
-            >
-              <img
-                src={img.src}
-                alt={img.caption}
-                className="w-full h-[300px] md:h-[400px] object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500 flex items-end p-6">
-                <p className="text-primary-foreground font-display text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
-                  {img.caption}
-                </p>
-              </div>
-            </motion.div>
+            <GalleryImage key={i} img={img} index={i} />
           ))}
         </div>
       </div>
