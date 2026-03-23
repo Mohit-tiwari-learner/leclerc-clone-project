@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import heroImg from "@/assets/hero-racing.jpg";
 import { SplitText, MagneticWrap, ScrollProgress } from "./ScrollAnimations";
+import { LineReveal } from "./SectionReveal";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -28,6 +29,9 @@ const HeroSection = () => {
           scale: smoothScale,
           y: imgY,
         }}
+        initial={{ scale: 1.5 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
       >
         <motion.div
           className="absolute inset-0 bg-foreground"
@@ -40,39 +44,35 @@ const HeroSection = () => {
         className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6"
       >
         <MagneticWrap strength={0.15}>
-          <h1 className="font-display font-black text-[clamp(4rem,15vw,12rem)] leading-none tracking-tighter text-primary-foreground">
+          <motion.h1
+            className="font-display font-black text-[clamp(4rem,15vw,12rem)] leading-none tracking-tighter text-primary-foreground"
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          >
             <SplitText
               text="CL"
               charClassName="text-primary-foreground"
-              delay={0.3}
+              delay={0.6}
             />
             <SplitText
               text="16"
               charClassName="text-primary"
-              delay={0.5}
+              delay={0.8}
             />
-          </h1>
+          </motion.h1>
         </MagneticWrap>
 
-        <div className="overflow-hidden mt-4">
-          <motion.p
-            initial={{ y: "110%" }}
-            animate={{ y: "0%" }}
-            transition={{
-              duration: 0.8,
-              delay: 0.9,
-              ease: [0.215, 0.61, 0.355, 1],
-            }}
-            className="text-display text-sm md:text-base text-primary-foreground/80 tracking-[0.3em]"
-          >
+        <LineReveal delay={1.0}>
+          <p className="text-display text-sm md:text-base text-primary-foreground/80 tracking-[0.3em]">
             Beyond Speed
-          </motion.p>
-        </div>
+          </p>
+        </LineReveal>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 1.8, duration: 1 }}
           className="absolute bottom-12 flex flex-col items-center gap-2"
         >
           <span className="text-primary-foreground/60 text-xs tracking-[0.2em] uppercase font-display">
