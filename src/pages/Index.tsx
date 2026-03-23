@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 import Navbar from "@/components/Navbar";
+import MarqueeBanner from "@/components/MarqueeBanner";
 import HeroSection from "@/components/HeroSection";
 import DriverSection from "@/components/DriverSection";
 import QuoteSection from "@/components/QuoteSection";
