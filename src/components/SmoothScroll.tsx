@@ -1,5 +1,5 @@
-import { useEffect, useRef, ReactNode } from "react";
-import { motion, useScroll, useSpring, useTransform, MotionValue } from "framer-motion";
+import { useEffect, useRef, useState, ReactNode } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 const SmoothScroll = ({ children }: { children: ReactNode }) => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -26,7 +26,6 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
     updateHeight();
     window.addEventListener("resize", updateHeight);
 
-    // Watch for content changes
     const observer = new ResizeObserver(updateHeight);
     if (contentRef.current) observer.observe(contentRef.current);
 
@@ -51,5 +50,3 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
 };
 
 export default SmoothScroll;
-
-import { useState } from "react";
