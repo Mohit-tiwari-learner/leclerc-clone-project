@@ -49,8 +49,10 @@ const Index = () => {
             <Navbar />
             <HeroSection />
             <DriverSection />
+            <MarqueeBanner />
             <QuoteSection />
             <CareerSection />
+            <MarqueeBanner />
             <GallerySection />
             <LifeAsDriverSection />
             <QuoteSection2 />
