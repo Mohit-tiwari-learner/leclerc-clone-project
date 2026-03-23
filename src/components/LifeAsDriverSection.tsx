@@ -4,7 +4,8 @@ import trainingImg from "@/assets/training.jpg";
 import preparationImg from "@/assets/preparation.jpg";
 import racingImg from "@/assets/racing.jpg";
 import offseasonImg from "@/assets/offseason.jpg";
-import { SplitText, SplitWords, RevealLine, ClipReveal } from "./ScrollAnimations";
+import { SplitText, SplitWords, RevealLine } from "./ScrollAnimations";
+import { TiltReveal, WipeReveal } from "./SectionReveal";
 
 const cards = [
   {
@@ -42,12 +43,21 @@ const LifeCard = ({ card, index }: { card: typeof cards[0]; index: number }) => 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 80, rotateY: -5 }}
-      animate={inView ? { opacity: 1, y: 0, rotateY: 0 } : {}}
+      initial={{
+        opacity: 0,
+        y: 100,
+        rotateY: -8,
+        filter: "blur(8px)",
+      }}
+      animate={
+        inView
+          ? { opacity: 1, y: 0, rotateY: 0, filter: "blur(0px)" }
+          : {}
+      }
       transition={{
-        duration: 0.8,
-        delay: index * 0.12,
-        ease: [0.215, 0.61, 0.355, 1],
+        duration: 1.2,
+        delay: index * 0.15,
+        ease: [0.76, 0, 0.24, 1],
       }}
       className="relative group overflow-hidden cursor-pointer"
       style={{ perspective: 1000 }}
@@ -87,23 +97,27 @@ const LifeAsDriverSection = () => {
   return (
     <section id="life" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto">
-        <RevealLine className="mb-8 max-w-[100px]" />
+        <WipeReveal direction="left">
+          <RevealLine className="mb-8 max-w-[100px]" />
+        </WipeReveal>
 
         <div className="overflow-hidden mb-2">
           <motion.p
             initial={{ y: "100%" }}
             whileInView={{ y: "0%" }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="text-display text-xs text-primary tracking-[0.3em]"
           >
             Driving
           </motion.p>
         </div>
 
-        <h2 className="font-display font-extrabold text-4xl md:text-6xl text-foreground mb-6 uppercase">
-          <SplitText text="Life as a Driver" delay={0.05} />
-        </h2>
+        <TiltReveal>
+          <h2 className="font-display font-extrabold text-4xl md:text-6xl text-foreground mb-6 uppercase">
+            <SplitText text="Life as a Driver" delay={0.05} />
+          </h2>
+        </TiltReveal>
 
         <SplitWords
           text="Great talent alone is not enough. It takes years of preparation, both physical and mental, and constant attention to every detail before, during and after every race."

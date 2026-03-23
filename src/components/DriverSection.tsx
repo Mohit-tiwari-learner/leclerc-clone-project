@@ -7,9 +7,8 @@ import {
   AnimatedCounter,
   ImageReveal,
   RevealLine,
-  StaggerContainer,
-  StaggerItem,
 } from "./ScrollAnimations";
+import { TiltReveal, TimelineStagger, TimelineItem, WipeReveal } from "./SectionReveal";
 
 const stats = [
   { label: "Grand Prix Raced", value: 141 },
@@ -29,14 +28,16 @@ const DriverSection = () => {
   return (
     <section id="driver" className="section-padding bg-background overflow-hidden" ref={sectionRef}>
       <motion.div style={{ y: bgY }} className="max-w-7xl mx-auto">
-        <RevealLine className="mb-8 max-w-[120px]" />
+        <WipeReveal direction="left">
+          <RevealLine className="mb-8 max-w-[120px]" />
+        </WipeReveal>
 
         <div className="overflow-hidden mb-2">
           <motion.p
             initial={{ y: "100%" }}
             whileInView={{ y: "0%" }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="text-display text-xs text-primary tracking-[0.3em]"
           >
             The Driver
@@ -45,13 +46,15 @@ const DriverSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mt-8">
           <div>
-            <h2 className="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-8">
-              <SplitText text="TALENT." delay={0} />
-              <br />
-              <SplitText text="INTELLIGENCE." delay={0.15} />
-              <br />
-              <SplitText text="HARD WORK." delay={0.3} />
-            </h2>
+            <TiltReveal>
+              <h2 className="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-8">
+                <SplitText text="TALENT." delay={0} />
+                <br />
+                <SplitText text="INTELLIGENCE." delay={0.15} />
+                <br />
+                <SplitText text="HARD WORK." delay={0.3} />
+              </h2>
+            </TiltReveal>
 
             <div className="overflow-hidden">
               <SplitWords
@@ -61,9 +64,9 @@ const DriverSection = () => {
               />
             </div>
 
-            <StaggerContainer className="grid grid-cols-2 gap-8" staggerDelay={0.12}>
+            <TimelineStagger className="grid grid-cols-2 gap-8" stagger={0.15}>
               {stats.map((stat) => (
-                <StaggerItem key={stat.label}>
+                <TimelineItem key={stat.label}>
                   <div className="border-t-2 border-foreground pt-4">
                     <p className="font-display font-black text-4xl md:text-5xl text-foreground">
                       <AnimatedCounter value={stat.value} delay={0.3} />
@@ -72,34 +75,36 @@ const DriverSection = () => {
                       {stat.label}
                     </p>
                   </div>
-                </StaggerItem>
+                </TimelineItem>
               ))}
-            </StaggerContainer>
+            </TimelineStagger>
           </div>
 
-          <div className="relative">
-            <ImageReveal
-              src={driverImg}
-              alt="Racing driver in pit lane"
-              className="h-[500px] lg:h-[700px]"
-              imgClassName="transition-transform duration-700 hover:scale-105"
-              delay={0.2}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-foreground/80 to-transparent"
-            >
-              <p className="text-primary-foreground font-display text-xs uppercase tracking-[0.2em]">
-                Date of Birth — <span className="text-primary">16th Oct 1997</span>
-              </p>
-              <p className="text-primary-foreground/70 font-display text-xs uppercase tracking-[0.2em] mt-1">
-                Hometown — Principality of Monaco
-              </p>
-            </motion.div>
-          </div>
+          <WipeReveal direction="right" delay={0.3}>
+            <div className="relative">
+              <ImageReveal
+                src={driverImg}
+                alt="Racing driver in pit lane"
+                className="h-[500px] lg:h-[700px]"
+                imgClassName="transition-transform duration-700 hover:scale-105"
+                delay={0.2}
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-foreground/80 to-transparent"
+              >
+                <p className="text-primary-foreground font-display text-xs uppercase tracking-[0.2em]">
+                  Date of Birth — <span className="text-primary">16th Oct 1997</span>
+                </p>
+                <p className="text-primary-foreground/70 font-display text-xs uppercase tracking-[0.2em] mt-1">
+                  Hometown — Principality of Monaco
+                </p>
+              </motion.div>
+            </div>
+          </WipeReveal>
         </div>
       </motion.div>
     </section>

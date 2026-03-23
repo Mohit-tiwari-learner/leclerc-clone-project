@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import quoteBg from "@/assets/quote-bg.jpg";
 import { SplitWords } from "./ScrollAnimations";
+import { LineReveal } from "./SectionReveal";
 
 const QuoteSection = () => {
   const ref = useRef(null);
@@ -29,15 +30,11 @@ const QuoteSection = () => {
       </motion.div>
 
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-primary text-xs uppercase tracking-[0.3em] font-display font-bold mb-6"
-        >
-          Philosophy
-        </motion.p>
+        <LineReveal delay={0.1}>
+          <p className="text-primary text-xs uppercase tracking-[0.3em] font-display font-bold mb-6">
+            Philosophy
+          </p>
+        </LineReveal>
         <h3 className="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl text-primary-foreground leading-tight uppercase">
           <SplitWords
             text="It's the mind that makes the difference"
