@@ -75,9 +75,7 @@ const Navbar = () => {
             </MagneticWrap>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`lg:hidden transition-colors ${
-                scrolled ? "text-foreground" : "text-primary-foreground"
-              }`}
+              className="lg:hidden transition-colors text-foreground"
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
