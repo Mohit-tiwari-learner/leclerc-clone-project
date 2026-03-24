@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
-import heroImg from "@/assets/hero-racing.jpg";
-import { SplitText, MagneticWrap, ScrollProgress } from "./ScrollAnimations";
-import { LineReveal } from "./SectionReveal";
+import { ArrowRight } from "lucide-react";
+import heroSky from "@/assets/hero-sky.jpg";
+import heroCar from "@/assets/hero-car.png";
+import { ScrollProgress } from "./ScrollAnimations";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -11,85 +12,120 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.4, 0.85]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const smoothScale = useSpring(imgScale, { stiffness: 80, damping: 25 });
+  const carY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const carScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const smoothCarY = useSpring(carY, { stiffness: 80, damping: 25 });
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden">
+    <section
+      ref={ref}
+      className="relative h-screen w-full overflow-hidden bg-background"
+    >
       <ScrollProgress />
 
+      {/* Sky background */}
       <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${heroImg})`,
-          scale: smoothScale,
-          y: imgY,
-        }}
-        initial={{ scale: 1.5 }}
+        className="absolute inset-0"
+        initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 2, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
+        transition={{ duration: 2, ease: [0.76, 0, 0.24, 1] }}
       >
-        <motion.div
-          className="absolute inset-0 bg-foreground"
-          style={{ opacity: overlayOpacity }}
+        <img
+          src={heroSky}
+          alt=""
+          className="w-full h-full object-cover"
+          width={1920}
+          height={1080}
         />
       </motion.div>
 
+      {/* Centered text content */}
       <motion.div
         style={{ y: textY, opacity: textOpacity }}
-        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6"
+        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-0 pb-[15vh]"
       >
-        <MagneticWrap strength={0.15}>
+        {/* Large heading */}
+        <div className="overflow-hidden">
           <motion.h1
-            className="font-display font-black text-[clamp(4rem,15vw,12rem)] leading-none tracking-tighter text-primary-foreground"
-            initial={{ clipPath: "inset(0 0 100% 0)" }}
-            animate={{ clipPath: "inset(0 0 0% 0)" }}
-            transition={{ duration: 1.2, delay: 0.5, ease: [0.76, 0, 0.24, 1] }}
+            className="font-display font-black text-[clamp(4rem,13vw,11rem)] leading-[0.9] tracking-tighter text-foreground/90"
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            transition={{
+              duration: 1.2,
+              delay: 0.3,
+              ease: [0.76, 0, 0.24, 1],
+            }}
           >
-            <SplitText
-              text="CL"
-              charClassName="text-primary-foreground"
-              delay={0.6}
-            />
-            <SplitText
-              text="16"
-              charClassName="text-primary"
-              delay={0.8}
-            />
+            Born To
           </motion.h1>
-        </MagneticWrap>
+        </div>
+        <div className="overflow-hidden">
+          <motion.h1
+            className="font-display font-black text-[clamp(4rem,13vw,11rem)] leading-[0.9] tracking-tighter text-foreground/90"
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            transition={{
+              duration: 1.2,
+              delay: 0.45,
+              ease: [0.76, 0, 0.24, 1],
+            }}
+          >
+            Race
+          </motion.h1>
+        </div>
 
-        <LineReveal delay={1.0}>
-          <p className="text-display text-sm md:text-base text-primary-foreground/80 tracking-[0.3em]">
-            Beyond Speed
-          </p>
-        </LineReveal>
-
-        <motion.div
+        {/* Subtitle */}
+        <motion.p
+          className="mt-6 text-base md:text-lg text-muted-foreground font-body max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 1 }}
-          className="absolute bottom-12 flex flex-col items-center gap-2"
+          transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
         >
-          <span className="text-primary-foreground/60 text-xs tracking-[0.2em] uppercase font-display">
-            Scroll to explore
+          <span className="font-semibold text-foreground">Scuderia Ferrari.</span>{" "}
+          Charles Leclerc.{" "}
+          <span className="text-muted-foreground">
+            A clear path to find what's next.
           </span>
-          <motion.div
-            className="w-px h-12 bg-primary-foreground/30"
-            animate={{ scaleY: [0, 1, 0] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{ transformOrigin: "top" }}
-          />
-        </motion.div>
+        </motion.p>
+
+        {/* CTA Button */}
+        <motion.a
+          href="#driver"
+          className="mt-8 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-foreground text-primary-foreground font-display font-bold text-sm tracking-wider hover:bg-foreground/90 transition-colors"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+        >
+          Explore
+          <ArrowRight size={16} />
+        </motion.a>
       </motion.div>
+
+      {/* Car image — layered on top, rising from bottom */}
+      <motion.div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] max-w-[900px] z-20 pointer-events-none"
+        style={{ y: smoothCarY, scale: carScale }}
+        initial={{ y: "40%", opacity: 0 }}
+        animate={{ y: "0%", opacity: 1 }}
+        transition={{
+          duration: 1.6,
+          delay: 0.6,
+          ease: [0.76, 0, 0.24, 1],
+        }}
+      >
+        <img
+          src={heroCar}
+          alt="Ferrari F1 Car"
+          className="w-full h-auto"
+          width={1920}
+          height={1080}
+        />
+      </motion.div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-30 pointer-events-none" />
     </section>
   );
 };

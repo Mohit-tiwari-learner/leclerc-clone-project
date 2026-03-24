@@ -36,10 +36,10 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
           <MagneticWrap strength={0.3}>
             <a href="#" className="font-display font-black text-2xl tracking-tighter">
-              <span className={scrolled ? "text-foreground" : "text-primary-foreground"}>
+              <span className="text-foreground">
                 CL
               </span>
-              <span className={scrolled ? "text-primary" : "text-primary-foreground"}>
+              <span className="text-primary">
                 16
               </span>
             </a>
@@ -53,9 +53,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 + i * 0.08 }}
                   href={item.href}
-                  className={`nav-link hover:text-primary relative group ${
-                    scrolled ? "text-foreground" : "text-primary-foreground"
-                  }`}
+                  className="nav-link hover:text-primary relative group text-foreground"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -70,18 +68,14 @@ const Navbar = () => {
                 href="https://www.instagram.com/charles_leclerc/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`transition-colors hover:text-primary ${
-                  scrolled ? "text-foreground" : "text-primary-foreground"
-                }`}
+                className="transition-colors hover:text-primary text-foreground"
               >
                 <Instagram size={18} />
               </a>
             </MagneticWrap>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`lg:hidden transition-colors ${
-                scrolled ? "text-foreground" : "text-primary-foreground"
-              }`}
+              className="lg:hidden transition-colors text-foreground"
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
