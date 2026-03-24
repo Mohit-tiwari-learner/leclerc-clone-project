@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Instagram } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MagneticWrap } from "./ScrollAnimations";
 
 const navItems = [
-  { label: "The Driver", href: "#driver" },
-  { label: "Career", href: "#career" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Life", href: "#life" },
-  { label: "News", href: "#news" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -36,12 +36,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
           <MagneticWrap strength={0.3}>
             <a href="#" className="font-display font-black text-2xl tracking-tighter">
-              <span className="text-foreground">
-                CL
-              </span>
-              <span className="text-primary">
-                16
-              </span>
+              <span className="text-foreground">ARC</span>
+              <span className="text-primary">.</span>
             </a>
           </MagneticWrap>
 
@@ -63,16 +59,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <MagneticWrap strength={0.5}>
-              <a
-                href="https://www.instagram.com/charles_leclerc/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-primary text-foreground"
-              >
-                <Instagram size={18} />
-              </a>
-            </MagneticWrap>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="lg:hidden transition-colors text-foreground"

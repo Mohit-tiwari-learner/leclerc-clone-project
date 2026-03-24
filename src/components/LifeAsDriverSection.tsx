@@ -9,23 +9,23 @@ import { TiltReveal, WipeReveal } from "./SectionReveal";
 
 const cards = [
   {
-    title: "Training",
-    desc: "Body and mind under extreme stress — G-force, heat, and mental strain demand peak physical condition.",
+    title: "Concept Design",
+    desc: "Every project begins with a vision — sketches, models, and bold ideas that challenge conventions.",
     img: trainingImg,
   },
   {
-    title: "Preparation",
-    desc: "In F1, every detail counts. Meticulous preparation of every aspect for peak race performance.",
+    title: "Construction",
+    desc: "Precise execution on-site, managing materials, timelines, and craftsmanship at every stage.",
     img: preparationImg,
   },
   {
-    title: "Racing",
-    desc: "Strategies defined, pace set, adrenaline rising — then the lights go out.",
+    title: "Interior Design",
+    desc: "Curating spaces from within — light, texture, and material come together for extraordinary living.",
     img: racingImg,
   },
   {
-    title: "Off-Season",
-    desc: "Intense training camps in the mountains, balanced with time for family and recovery.",
+    title: "Sustainable Design",
+    desc: "Green roofs, passive cooling, and biophilic design — architecture that respects the planet.",
     img: offseasonImg,
   },
 ];
@@ -95,7 +95,7 @@ const LifeCard = ({ card, index }: { card: typeof cards[0]; index: number }) => 
 
 const LifeAsDriverSection = () => {
   return (
-    <section id="life" className="section-padding bg-background">
+    <section id="services" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto">
         <WipeReveal direction="left">
           <RevealLine className="mb-8 max-w-[100px]" />
@@ -109,18 +109,18 @@ const LifeAsDriverSection = () => {
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="text-display text-xs text-primary tracking-[0.3em]"
           >
-            Driving
+            Services
           </motion.p>
         </div>
 
         <TiltReveal>
           <h2 className="font-display font-extrabold text-4xl md:text-6xl text-foreground mb-6 uppercase">
-            <SplitText text="Life as a Driver" delay={0.05} />
+            <SplitText text="What We Do" delay={0.05} />
           </h2>
         </TiltReveal>
 
         <SplitWords
-          text="Great talent alone is not enough. It takes years of preparation, both physical and mental, and constant attention to every detail before, during and after every race."
+          text="From initial concept to final construction, we guide every project through a rigorous creative process that balances beauty, functionality, and sustainability."
           className="font-body text-muted-foreground text-base md:text-lg max-w-2xl mb-16"
           delay={0.2}
         />

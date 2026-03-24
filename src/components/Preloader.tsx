@@ -83,7 +83,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                 animate={{ opacity: 1, letterSpacing: "0.5em" }}
                 transition={{ duration: 1, delay: 0.5 }}
               >
-                Charles Leclerc
+                ARC Studio
               </motion.p>
             </motion.div>
           </motion.div>

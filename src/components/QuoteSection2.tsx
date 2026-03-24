@@ -22,7 +22,7 @@ const QuoteSection2 = () => {
             className="h-[2px] bg-primary-foreground/50 mx-auto mb-8"
           />
           <h3 className="font-display font-extrabold text-3xl md:text-5xl text-primary-foreground uppercase leading-tight">
-            <SplitWords text="It's more about hard work than talent" delay={0.05} />
+            <SplitWords text="Every space tells a story worth building" delay={0.05} />
           </h3>
           <motion.div
             initial={{ width: "0%" }}
