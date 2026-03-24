@@ -53,9 +53,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 + i * 0.08 }}
                   href={item.href}
-                  className={`nav-link hover:text-primary relative group ${
-                    scrolled ? "text-foreground" : "text-primary-foreground"
-                  }`}
+                  className="nav-link hover:text-primary relative group text-foreground"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
