@@ -36,10 +36,10 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
           <MagneticWrap strength={0.3}>
             <a href="#" className="font-display font-black text-2xl tracking-tighter">
-              <span className={scrolled ? "text-foreground" : "text-primary-foreground"}>
+              <span className="text-foreground">
                 CL
               </span>
-              <span className={scrolled ? "text-primary" : "text-primary-foreground"}>
+              <span className="text-primary">
                 16
               </span>
             </a>
