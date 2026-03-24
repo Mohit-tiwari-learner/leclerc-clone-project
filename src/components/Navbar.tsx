@@ -68,9 +68,7 @@ const Navbar = () => {
                 href="https://www.instagram.com/charles_leclerc/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`transition-colors hover:text-primary ${
-                  scrolled ? "text-foreground" : "text-primary-foreground"
-                }`}
+                className="transition-colors hover:text-primary text-foreground"
               >
                 <Instagram size={18} />
               </a>
