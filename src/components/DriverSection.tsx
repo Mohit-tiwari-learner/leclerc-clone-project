@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import driverImg from "@/assets/driver-portrait.jpg";
+import architectImg from "@/assets/architect-portrait.jpg";
 import {
   SplitText,
   SplitWords,
@@ -11,10 +11,10 @@ import {
 import { TiltReveal, TimelineStagger, TimelineItem, WipeReveal } from "./SectionReveal";
 
 const stats = [
-  { label: "Grand Prix Raced", value: 141 },
-  { label: "Podiums", value: 38 },
-  { label: "Victories", value: 7 },
-  { label: "Pole Positions", value: 25 },
+  { label: "Projects Completed", value: 240 },
+  { label: "Design Awards", value: 38 },
+  { label: "Team Members", value: 65 },
+  { label: "Cities Worldwide", value: 12 },
 ];
 
 const DriverSection = () => {
@@ -26,7 +26,7 @@ const DriverSection = () => {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);
 
   return (
-    <section id="driver" className="section-padding bg-background overflow-hidden" ref={sectionRef}>
+    <section id="about" className="section-padding bg-background overflow-hidden" ref={sectionRef}>
       <motion.div style={{ y: bgY }} className="max-w-7xl mx-auto">
         <WipeReveal direction="left">
           <RevealLine className="mb-8 max-w-[120px]" />
@@ -40,7 +40,7 @@ const DriverSection = () => {
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="text-display text-xs text-primary tracking-[0.3em]"
           >
-            The Driver
+            About Us
           </motion.p>
         </div>
 
@@ -48,17 +48,17 @@ const DriverSection = () => {
           <div>
             <TiltReveal>
               <h2 className="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-8">
-                <SplitText text="TALENT." delay={0} />
+                <SplitText text="VISION." delay={0} />
                 <br />
-                <SplitText text="INTELLIGENCE." delay={0.15} />
+                <SplitText text="PRECISION." delay={0.15} />
                 <br />
-                <SplitText text="HARD WORK." delay={0.3} />
+                <SplitText text="CRAFT." delay={0.3} />
               </h2>
             </TiltReveal>
 
             <div className="overflow-hidden">
               <SplitWords
-                text="Born in Monte Carlo on 16 October 1997, Charles is one of the strongest and most promising drivers in modern Formula 1. From karting at three years old to becoming an official Ferrari driver, his journey is defined by relentless determination and extraordinary speed."
+                text="Founded in 2004, ARC Studio is an award-winning architecture firm specializing in residential, commercial, and cultural projects. We believe great architecture emerges from the dialogue between form, function, and the human experience."
                 className="font-body text-muted-foreground text-base md:text-lg leading-relaxed mb-12"
                 delay={0.1}
               />
@@ -83,8 +83,8 @@ const DriverSection = () => {
           <WipeReveal direction="right" delay={0.3}>
             <div className="relative">
               <ImageReveal
-                src={driverImg}
-                alt="Racing driver in pit lane"
+                src={architectImg}
+                alt="Lead architect at construction site"
                 className="h-[500px] lg:h-[700px]"
                 imgClassName="transition-transform duration-700 hover:scale-105"
                 delay={0.2}
@@ -97,10 +97,10 @@ const DriverSection = () => {
                 className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-foreground/80 to-transparent"
               >
                 <p className="text-primary-foreground font-display text-xs uppercase tracking-[0.2em]">
-                  Date of Birth — <span className="text-primary">16th Oct 1997</span>
+                  Founded — <span className="text-primary">2004</span>
                 </p>
                 <p className="text-primary-foreground/70 font-display text-xs uppercase tracking-[0.2em] mt-1">
-                  Hometown — Principality of Monaco
+                  Headquarters — New York City
                 </p>
               </motion.div>
             </div>

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const Marquee = ({
-  text = "CHARLES LECLERC",
+  text = "ARC STUDIO",
   separator = "✦",
   speed = 20,
   className = "",
@@ -46,12 +46,12 @@ const MarqueeBanner = () => {
   return (
     <div className="bg-foreground py-6 md:py-8 overflow-hidden select-none">
       <Marquee
-        text="CHARLES LECLERC"
+        text="ARC STUDIO"
         className="font-display font-black text-[clamp(3rem,8vw,7rem)] text-primary-foreground/[0.04] leading-none"
         speed={25}
       />
       <Marquee
-        text="CL16 — SCUDERIA FERRARI — MONACO"
+        text="ARCHITECTURE — INTERIORS — URBAN DESIGN"
         separator="●"
         className="font-display font-bold text-xs md:text-sm tracking-[0.3em] text-primary/40 mt-4"
         speed={30}

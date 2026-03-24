@@ -7,15 +7,15 @@ import {
 import { TiltReveal, WipeReveal } from "./SectionReveal";
 
 const timeline = [
-  { year: "2009", desc: "Youngest French Championship winner — Cadet category" },
-  { year: "2010", desc: "Youngest winner of the Monaco Kart Cup KF3" },
-  { year: "2011", desc: "Youngest winner of the CIK-FIA KF3 World Cup" },
-  { year: "2012", desc: "CIK-FIA World Champion U18" },
-  { year: "2016", desc: "GP3 Series Champion" },
-  { year: "2017", desc: "FIA Formula 2 Championship Winner" },
-  { year: "2018", desc: "Formula 1 debut with Alfa Romeo Sauber" },
-  { year: "2019", desc: "Joined Scuderia Ferrari — Victory at Monza" },
-  { year: "2024", desc: "Home victory at Monaco Grand Prix" },
+  { year: "2004", desc: "Studio founded in New York — first residential commission" },
+  { year: "2007", desc: "Won AIA Emerging Architecture Firm Award" },
+  { year: "2010", desc: "Completed the Horizon Cultural Center — 50,000 sq ft" },
+  { year: "2013", desc: "Expanded to London office — European projects begin" },
+  { year: "2016", desc: "Designed the Skyline Tower — tallest residential in the city" },
+  { year: "2019", desc: "Awarded Pritzker Prize nomination for sustainability work" },
+  { year: "2021", desc: "Launched urban renewal initiative — 3 city blocks redesigned" },
+  { year: "2023", desc: "Completed the Meridian Museum of Contemporary Art" },
+  { year: "2025", desc: "Global expansion — offices in Tokyo and Dubai" },
 ];
 
 const TimelineEntry = ({
@@ -89,7 +89,7 @@ const CareerSection = () => {
   );
 
   return (
-    <section id="career" className="section-padding bg-secondary" ref={sectionRef}>
+    <section id="projects" className="section-padding bg-secondary" ref={sectionRef}>
       <div className="max-w-5xl mx-auto">
         <WipeReveal direction="left">
           <RevealLine className="mb-8 max-w-[80px]" />
@@ -103,13 +103,13 @@ const CareerSection = () => {
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="text-display text-xs text-primary tracking-[0.3em]"
           >
-            Career
+            Milestones
           </motion.p>
         </div>
 
         <TiltReveal>
           <h2 className="font-display font-extrabold text-4xl md:text-5xl text-foreground mb-16 uppercase">
-            <SplitText text="Beginnings" delay={0.1} />
+            <SplitText text="Our Journey" delay={0.1} />
           </h2>
         </TiltReveal>
 

@@ -8,10 +8,10 @@ import { SplitText, RevealLine } from "./ScrollAnimations";
 import { ElasticReveal, WipeReveal } from "./SectionReveal";
 
 const images = [
-  { src: gallery1, caption: "Podium Celebration", size: "tall" },
-  { src: gallery2, caption: "Monaco Street Circuit", size: "normal" },
-  { src: gallery3, caption: "Crossing the Finish Line", size: "normal" },
-  { src: heroImg, caption: "On Track at Sunset", size: "tall" },
+  { src: gallery1, caption: "Villa Serena — Residential", size: "tall" },
+  { src: gallery2, caption: "Apex Tower — Commercial", size: "normal" },
+  { src: gallery3, caption: "Meridian Bridge — Infrastructure", size: "normal" },
+  { src: heroImg, caption: "Wave Pavilion — Cultural", size: "tall" },
 ];
 
 const GalleryImage = ({
@@ -75,7 +75,7 @@ const GalleryImage = ({
 
 const GallerySection = () => {
   return (
-    <section id="gallery" className="section-padding bg-foreground">
+    <section id="portfolio" className="section-padding bg-foreground">
       <div className="max-w-7xl mx-auto">
         <WipeReveal direction="left">
           <RevealLine className="mb-8 max-w-[80px]" />
@@ -89,13 +89,13 @@ const GallerySection = () => {
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="text-display text-xs text-primary tracking-[0.3em]"
           >
-            Gallery
+            Portfolio
           </motion.p>
         </div>
 
         <ElasticReveal>
           <h2 className="font-display font-extrabold text-4xl md:text-5xl text-primary-foreground mb-16 uppercase">
-            <SplitText text="Moments" charClassName="text-primary-foreground" delay={0.1} />
+            <SplitText text="Featured Work" charClassName="text-primary-foreground" delay={0.1} />
           </h2>
         </ElasticReveal>
 

@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import heroSky from "@/assets/hero-sky.jpg";
-import heroCar from "@/assets/hero-car.png";
+import heroBuilding from "@/assets/hero-building.png";
 import { ScrollProgress } from "./ScrollAnimations";
 
 const HeroSection = () => {
@@ -12,11 +12,11 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  const carY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const buildingY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const carScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const smoothCarY = useSpring(carY, { stiffness: 80, damping: 25 });
+  const buildingScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const smoothBuildingY = useSpring(buildingY, { stiffness: 80, damping: 25 });
 
   return (
     <section
@@ -46,7 +46,6 @@ const HeroSection = () => {
         style={{ y: textY, opacity: textOpacity }}
         className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-0 pb-[15vh]"
       >
-        {/* Large heading */}
         <div className="overflow-hidden">
           <motion.h1
             className="font-display font-black text-[clamp(4rem,13vw,11rem)] leading-[0.9] tracking-tighter text-foreground/90"
@@ -58,7 +57,7 @@ const HeroSection = () => {
               ease: [0.76, 0, 0.24, 1],
             }}
           >
-            Born To
+            Design
           </motion.h1>
         </div>
         <div className="overflow-hidden">
@@ -72,7 +71,7 @@ const HeroSection = () => {
               ease: [0.76, 0, 0.24, 1],
             }}
           >
-            Race
+            That Endures
           </motion.h1>
         </div>
 
@@ -83,30 +82,30 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
         >
-          <span className="font-semibold text-foreground">Scuderia Ferrari.</span>{" "}
-          Charles Leclerc.{" "}
+          <span className="font-semibold text-foreground">Award-winning studio.</span>{" "}
+          Visionary architecture.{" "}
           <span className="text-muted-foreground">
-            A clear path to find what's next.
+            Shaping spaces that inspire.
           </span>
         </motion.p>
 
         {/* CTA Button */}
         <motion.a
-          href="#driver"
+          href="#about"
           className="mt-8 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-foreground text-primary-foreground font-display font-bold text-sm tracking-wider hover:bg-foreground/90 transition-colors"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
         >
-          Explore
+          View Projects
           <ArrowRight size={16} />
         </motion.a>
       </motion.div>
 
-      {/* Car image — layered on top, rising from bottom */}
+      {/* Building image — layered on top, rising from bottom */}
       <motion.div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] max-w-[900px] z-20 pointer-events-none"
-        style={{ y: smoothCarY, scale: carScale }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] max-w-[1000px] z-20 pointer-events-none"
+        style={{ y: smoothBuildingY, scale: buildingScale }}
         initial={{ y: "40%", opacity: 0 }}
         animate={{ y: "0%", opacity: 1 }}
         transition={{
@@ -116,8 +115,8 @@ const HeroSection = () => {
         }}
       >
         <img
-          src={heroCar}
-          alt="Ferrari F1 Car"
+          src={heroBuilding}
+          alt="Modern Architecture"
           className="w-full h-auto"
           width={1920}
           height={1080}

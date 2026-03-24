@@ -37,7 +37,7 @@ const QuoteSection = () => {
         </LineReveal>
         <h3 className="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl text-primary-foreground leading-tight uppercase">
           <SplitWords
-            text="It's the mind that makes the difference"
+            text="Architecture is the thoughtful making of space"
             delay={0.1}
           />
         </h3>
