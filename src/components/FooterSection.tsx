@@ -15,6 +15,8 @@ const FooterSection = () => {
 
   const bigTextY = useTransform(scrollYProgress, [0, 1], [100, -50]);
 
+  const cubicEase = [0.76, 0, 0.24, 1] as const;
+
   const containerVariants = {
     hidden: {},
     visible: {
@@ -31,7 +33,14 @@ const FooterSection = () => {
     },
   };
 
-  const cubicEase = [0.76, 0, 0.24, 1] as const;
+  const headingVariants = {
+    hidden: { opacity: 0, y: "100%" },
+    visible: {
+      opacity: 1,
+      y: "0%",
+      transition: { duration: 0.9, ease: cubicEase },
+    },
+  };
 
   const headingVariants = {
     hidden: { opacity: 0, y: "100%" },
