@@ -7,6 +7,8 @@ import racingImg from "@/assets/racing.jpg";
 import offseasonImg from "@/assets/offseason.jpg";
 import { SplitText, SplitWords, RevealLine, AnimatedCounter } from "./ScrollAnimations";
 import { WipeReveal } from "./SectionReveal";
+import { useIsMobile } from "@/hooks/use-mobile";
+import MobileServiceCarousel from "./MobileServiceCarousel";
 
 const cards = [
   {
