@@ -312,17 +312,17 @@ const LifeAsDriverSection = () => {
       {/* Ambient background orbs */}
       <AmbientOrb
         className="w-[400px] h-[400px] -top-40 -left-40 opacity-20 blur-[100px]"
-        style={{ background: "hsl(var(--primary) / 0.3)" } as any}
+        style={{ background: "hsl(var(--primary) / 0.3)" }}
       />
       <AmbientOrb
         className="w-[300px] h-[300px] top-1/2 -right-20 opacity-15 blur-[80px]"
         delay={3}
-        style={{ background: "hsl(210 80% 50% / 0.15)" } as any}
+        style={{ background: "hsl(210 80% 50% / 0.15)" }}
       />
       <AmbientOrb
         className="w-[250px] h-[250px] bottom-20 left-1/3 opacity-10 blur-[90px]"
         delay={6}
-        style={{ background: "hsl(var(--primary) / 0.2)" } as any}
+        style={{ background: "hsl(var(--primary) / 0.2)" }}
       />
 
       {/* Water ripple filter (shared) */}
