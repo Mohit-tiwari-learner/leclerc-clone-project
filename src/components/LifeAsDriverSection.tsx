@@ -309,6 +309,8 @@ const AmbientOrb = ({ className, delay = 0, style }: { className: string; delay?
 );
 
 const LifeAsDriverSection = () => {
+  const isMobile = useIsMobile();
+
   return (
     <section id="services" className="relative section-padding overflow-hidden" style={{ background: "hsl(var(--foreground))" }}>
       {/* Ambient background orbs */}
@@ -327,8 +329,8 @@ const LifeAsDriverSection = () => {
         style={{ background: "hsl(var(--primary) / 0.2)" }}
       />
 
-      {/* Water ripple filter (shared) */}
-      <WaterFilter />
+      {/* Water ripple filter (shared, desktop only) */}
+      {!isMobile && <WaterFilter />}
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <WipeReveal direction="left">
@@ -359,11 +361,16 @@ const LifeAsDriverSection = () => {
           delay={0.2}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {cards.map((card, i) => (
-            <GlassCard key={card.title} card={card} index={i} />
-          ))}
-        </div>
+        {/* Mobile: swipe carousel | Desktop: grid */}
+        {isMobile ? (
+          <MobileServiceCarousel cards={cards} />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {cards.map((card, i) => (
+              <GlassCard key={card.title} card={card} index={i} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
