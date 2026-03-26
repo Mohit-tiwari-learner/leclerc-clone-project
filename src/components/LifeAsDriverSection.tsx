@@ -288,7 +288,7 @@ const GlassCard = ({ card, index }: { card: typeof cards[0]; index: number }) =>
 };
 
 // Ambient floating orb
-const AmbientOrb = ({ className, delay = 0 }: { className: string; delay?: number }) => (
+const AmbientOrb = ({ className, delay = 0, style }: { className: string; delay?: number; style?: React.CSSProperties }) => (
   <motion.div
     className={`absolute rounded-full pointer-events-none ${className}`}
     animate={{
