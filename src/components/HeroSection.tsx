@@ -83,7 +83,7 @@ const HeroSection = () => {
       {/* Sky background with mouse parallax */}
       <motion.div
         className="absolute inset-[-20px]"
-        style={{ x: smoothMouseX, y: smoothMouseY }}
+        style={{ x: smoothMouseX, y: smoothMouseY, scale: skyScale }}
         initial={{ scale: 1.2, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2.5, ease: [0.76, 0, 0.24, 1] }}
