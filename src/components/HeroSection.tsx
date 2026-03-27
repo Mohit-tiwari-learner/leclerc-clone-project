@@ -231,12 +231,12 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Building image — layered on top, rising from bottom */}
+      {/* Building image — walk-in zoom effect */}
       <motion.div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] max-w-[950px] z-20 pointer-events-none"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] max-w-[950px] z-20 pointer-events-none origin-[50%_85%]"
         style={{
           y: smoothBuildingY,
-          scale: buildingScale,
+          scale: smoothBuildingScale,
           x: smoothMouseX,
         }}
         initial={{ y: "50%", opacity: 0, scale: 0.9 }}
@@ -255,6 +255,15 @@ const HeroSection = () => {
           height={1080}
         />
       </motion.div>
+
+      {/* Vignette overlay for walk-in tunnel effect */}
+      <motion.div
+        className="absolute inset-0 z-[25] pointer-events-none"
+        style={{
+          opacity: smoothVignette,
+          background: "radial-gradient(ellipse 50% 50% at 50% 60%, transparent 0%, hsl(var(--foreground)) 100%)",
+        }}
+      />
 
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/60 to-transparent z-30 pointer-events-none" />
