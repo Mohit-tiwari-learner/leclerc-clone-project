@@ -9,6 +9,8 @@ import {
   RevealLine,
 } from "./ScrollAnimations";
 import { TiltReveal, TimelineStagger, TimelineItem, WipeReveal } from "./SectionReveal";
+import BeforeAfterSlider from "./BeforeAfterSlider";
+import TeamParallaxGrid from "./TeamParallaxGrid";
 
 const stats = [
   { label: "Projects Completed", value: 240 },
@@ -106,6 +108,23 @@ const DriverSection = () => {
             </div>
           </WipeReveal>
         </div>
+
+        {/* Before/After Renovation Slider */}
+        <div className="mt-20">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-[2px] bg-primary" />
+            <span className="font-display text-[10px] tracking-[0.4em] uppercase text-muted-foreground font-semibold">
+              Transformation
+            </span>
+          </div>
+          <h3 className="font-display font-extrabold text-2xl md:text-3xl text-foreground uppercase mb-8">
+            Before &amp; After
+          </h3>
+          <BeforeAfterSlider />
+        </div>
+
+        {/* Team Parallax Grid */}
+        <TeamParallaxGrid />
       </motion.div>
     </section>
   );

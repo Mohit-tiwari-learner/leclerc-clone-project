@@ -6,6 +6,7 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import heroImg from "@/assets/hero-racing.jpg";
 import { SplitText, RevealLine } from "./ScrollAnimations";
 import { ElasticReveal, WipeReveal } from "./SectionReveal";
+import PanoramaViewer from "./PanoramaViewer";
 
 const images = [
   { src: gallery1, caption: "Villa Serena — Residential", size: "tall" },
@@ -104,6 +105,9 @@ const GallerySection = () => {
             <GalleryImage key={i} img={img} index={i} />
           ))}
         </div>
+
+        {/* 360° Panorama Viewer */}
+        <PanoramaViewer />
       </div>
     </section>
   );
