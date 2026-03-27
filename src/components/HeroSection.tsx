@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useAnimationFrame } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ArrowRight, ArrowDown } from "lucide-react";
-import heroSky from "@/assets/hero-sky.jpg";
+import heroVideo from "/hero-video.mp4";
 import heroBuilding from "@/assets/hero-building.png";
 
 const HeroSection = () => {
