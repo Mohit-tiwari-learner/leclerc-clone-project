@@ -11,12 +11,19 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  const buildingY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const buildingY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const buildingScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 0.5]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  // Walk-in zoom: building scales dramatically as you scroll
+  const buildingScale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1.8, 3.2]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.4, 0.8], [0, 0.3, 0.85]);
   const smoothBuildingY = useSpring(buildingY, { stiffness: 60, damping: 20 });
+  const smoothBuildingScale = useSpring(buildingScale, { stiffness: 50, damping: 25 });
+  // Vignette effect intensifies during walk-in
+  const vignetteOpacity = useTransform(scrollYProgress, [0.2, 0.8], [0, 0.7]);
+  const smoothVignette = useSpring(vignetteOpacity, { stiffness: 60, damping: 25 });
+  // Sky zooms subtly too
+  const skyScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
 
   // Mouse parallax
   const mouseX = useMotionValue(0);
@@ -76,7 +83,7 @@ const HeroSection = () => {
       {/* Sky background with mouse parallax */}
       <motion.div
         className="absolute inset-[-20px]"
-        style={{ x: smoothMouseX, y: smoothMouseY }}
+        style={{ x: smoothMouseX, y: smoothMouseY, scale: skyScale }}
         initial={{ scale: 1.2, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2.5, ease: [0.76, 0, 0.24, 1] }}
@@ -224,12 +231,12 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Building image — layered on top, rising from bottom */}
+      {/* Building image — walk-in zoom effect */}
       <motion.div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] max-w-[950px] z-20 pointer-events-none"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] max-w-[950px] z-20 pointer-events-none origin-[50%_85%]"
         style={{
           y: smoothBuildingY,
-          scale: buildingScale,
+          scale: smoothBuildingScale,
           x: smoothMouseX,
         }}
         initial={{ y: "50%", opacity: 0, scale: 0.9 }}
@@ -248,6 +255,15 @@ const HeroSection = () => {
           height={1080}
         />
       </motion.div>
+
+      {/* Vignette overlay for walk-in tunnel effect */}
+      <motion.div
+        className="absolute inset-0 z-[25] pointer-events-none"
+        style={{
+          opacity: smoothVignette,
+          background: "radial-gradient(ellipse 50% 50% at 50% 60%, transparent 0%, hsl(var(--foreground)) 100%)",
+        }}
+      />
 
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/60 to-transparent z-30 pointer-events-none" />
