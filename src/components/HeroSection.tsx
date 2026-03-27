@@ -88,12 +88,13 @@ const HeroSection = () => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2.5, ease: [0.76, 0, 0.24, 1] }}
       >
-        <img
-          src={heroSky}
-          alt=""
+        <video
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
-          width={1920}
-          height={1080}
         />
       </motion.div>
 
