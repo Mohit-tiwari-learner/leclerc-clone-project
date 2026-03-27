@@ -11,12 +11,19 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  const buildingY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const buildingY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const buildingScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 0.5]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  // Walk-in zoom: building scales dramatically as you scroll
+  const buildingScale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1.8, 3.2]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.4, 0.8], [0, 0.3, 0.85]);
   const smoothBuildingY = useSpring(buildingY, { stiffness: 60, damping: 20 });
+  const smoothBuildingScale = useSpring(buildingScale, { stiffness: 50, damping: 25 });
+  // Vignette effect intensifies during walk-in
+  const vignetteOpacity = useTransform(scrollYProgress, [0.2, 0.8], [0, 0.7]);
+  const smoothVignette = useSpring(vignetteOpacity, { stiffness: 60, damping: 25 });
+  // Sky zooms subtly too
+  const skyScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
 
   // Mouse parallax
   const mouseX = useMotionValue(0);
