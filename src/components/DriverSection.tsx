@@ -9,6 +9,8 @@ import {
   RevealLine,
 } from "./ScrollAnimations";
 import { TiltReveal, TimelineStagger, TimelineItem, WipeReveal } from "./SectionReveal";
+import BeforeAfterSlider from "./BeforeAfterSlider";
+import TeamParallaxGrid from "./TeamParallaxGrid";
 
 const stats = [
   { label: "Projects Completed", value: 240 },
