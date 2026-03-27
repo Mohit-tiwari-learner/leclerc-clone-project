@@ -105,6 +105,9 @@ const GallerySection = () => {
             <GalleryImage key={i} img={img} index={i} />
           ))}
         </div>
+
+        {/* 360° Panorama Viewer */}
+        <PanoramaViewer />
       </div>
     </section>
   );
